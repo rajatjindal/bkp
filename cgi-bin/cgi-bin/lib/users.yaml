@@ -1,0 +1,15 @@
+rjindal:
+    modules: 
+        printing:
+            read: 1
+            write: 1
+        die:
+            read: 1
+            write: 1
+    auth: 
+        password: admin
+        firstLoginChange: 0
+    personal:
+        firstName: Rajat
+        lastName: Jindal
+        designation: Director
