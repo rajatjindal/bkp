@@ -34,11 +34,11 @@ $(document).ready(function(e) {
             data: form_data,     
             cache: false,
             beforeSend: function(xhr){xhr.setRequestHeader('Content-Type', 'application/json');},
-            success: function(returnhtml) {
+            success: function(data, textStatus, xhr) {
+                console.log(data);
                 window.location = "/bkp/dashboard.html";
             }
         });    
         
     });
-    
 });
