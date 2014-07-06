@@ -64,7 +64,7 @@ sub print_response {
     
     my $response;
     if (ref($return->{'content'}) && ref($return->{'content'}) ne 'SCALAR') {
-        $response = JSON::PP->new->utf8->encode($return->{'content'});
+        $response = JSON::PP->new->utf8->pretty->encode($return->{'content'});
     } else {
         $response = $return->{'content'};
     }

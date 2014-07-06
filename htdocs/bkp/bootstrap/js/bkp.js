@@ -43,7 +43,6 @@ $(document).ready(function(e) {
         });
         var form_url = $(this).attr("action");
         var form_method = $(this).attr("method").toUpperCase();
-        alert(form_data);
         $.ajax({
             url: form_url, 
             type: form_method,      
