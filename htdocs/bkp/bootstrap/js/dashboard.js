@@ -32,7 +32,8 @@ var getJobs = function (moduleName) {
     var d = new Date();
     var day = d.getDate(); if (day <=9) { day = "0" + day }
     var month = d.getMonth() + 1; if (month <=9) { month = "0" + month }
-    var date = month + "-" + day + "-" + d.getUTCFullYear();
+    //var date = month + "-" + day + "-" + d.getUTCFullYear();
+    var date = month + "-" + "05" + "-" + d.getUTCFullYear();
     
     var form_data = JSON.stringify({
         "date": date,
@@ -58,7 +59,12 @@ var displayJobs = function (data) {
     var rowCount = 0;
     jQuery.each(data, function () {
         jQuery.each(this, function(machineType, rows) {
-            $( "<tr id='row_" + rowCount + "'><th>" + machineType + "</th><th colspan=5>&nbsp;</th></tr>" ).appendTo( "#datatable" );
+            var rowId = "row_" + rowCount;
+            var buttonTH = "buttonth_" + rowCount;
+            $( "<tr id='row_" + rowCount + "'><th>" + machineType + "</th><th id='" + buttonTH + "' colspan=1>&nbsp;</th></tr>" ).appendTo( "#datatable" );
+            $("<button class='btn btn-default align-left' type='submit'>New</button>").appendTo("#" + buttonTH);
+            $("<button class='btn btn-default align-left' type='submit'>Edit</button>").appendTo("#" + buttonTH);
+            $("<button class='btn btn-default align-left' type='submit'>Delete</button>").appendTo("#" + buttonTH);
             rowCount = rowCount + 1;
             jQuery.each(rows, function () {
                 var value = this;
@@ -74,6 +80,9 @@ var displayJobs = function (data) {
             })
         })
     }); 
+    $('#datatable tr').on('click', function(event) {
+        $(this).addClass('highlight').siblings().removeClass('highlight');
+    });
 }
 
 $(document).ready(function(e) {
