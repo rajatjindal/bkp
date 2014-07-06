@@ -13,12 +13,12 @@
         firstName: Rajat
         lastName: Jindal
         designation: Director
-ssingla:
+ssingla@r.com:
     modules: 
         printing:
             read: 1
             write: 1
-        die:
+        store:
             read: 1
             write: 0
     auth: 

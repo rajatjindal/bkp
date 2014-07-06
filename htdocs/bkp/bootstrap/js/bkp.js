@@ -17,8 +17,24 @@
     };
 })(jQuery);
 
+function setCookie(cname, cvalue, exhrs) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exhrs*60*60*1000));
+    var expires = "expires="+d.toGMTString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
 $(document).ready(function(e) {
-    
     $("#loginForm").submit(function(e) {
         e.preventDefault();
         var form_data = JSON.stringify({
@@ -36,9 +52,10 @@ $(document).ready(function(e) {
             beforeSend: function(xhr){xhr.setRequestHeader('Content-Type', 'application/json');},
             success: function(data, textStatus, xhr) {
                 console.log(data);
+                setCookie("u", document.getElementById('email').value, 4);
+                setCookie("modules", data);
                 window.location = "/bkp/dashboard.html";
             }
         });    
-        
     });
 });

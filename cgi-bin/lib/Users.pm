@@ -2,6 +2,7 @@ package Users;
 
 use strict;
 use warnings;
+use lib ".";
 use YAML;
 
 sub new {
@@ -33,7 +34,7 @@ sub get_users {
     if($$users{$$args{'email'}}{'auth'}{'password'} ne $$args{'password'}) {
         return {code => 401, content => "Invalid username or password"}
     }
-    return { code => 200, content => [keys $self->{_users}]};
+    return { code => 200, content => [keys $$users{$$args{'email'}}{'modules'}]};
 }
 
 1;

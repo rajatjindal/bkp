@@ -5,6 +5,7 @@ use warnings;
 use CGI;
 use lib "./lib";
 use Users;
+use Modules;
 use Data::Dump qw(dump);
 use JSON::PP;
 
@@ -16,6 +17,7 @@ my %RC = (
 my $q = CGI->new();
 my $method = lc($ENV{'REQUEST_METHOD'});
 my $path = $ENV{'REQUEST_URI'};
+$path =~ s/^\/cgi-bin\/index\.pl//g;
 my $data;
 
 if (lc($method) eq 'post') {
@@ -42,16 +44,29 @@ sub get {
 
 sub post {
     my $path = shift;
-    my $data = shift;
-    my $users = Users->new();
-    my $return = $users->get_users($data);
+    my $args = shift;
+    
+    my $return;
+    if ($path =~ '/login') {
+        my $users = Users->new();
+        $return = $users->get_users($args);
+    } elsif ($path =~ '/getJobs') {
+        my $module = Modules->new();
+        $return = $module->get_jobs($args);
+    }
+    print_response($return, $path);
+}
+
+sub print_response {
+    my $return = shift;
+    my $path = shift;
     print $q->header(-status => $return->{'code'}, -Content_type => 'application/json');
     
     my $response;
     if (ref($return->{'content'}) && ref($return->{'content'}) ne 'SCALAR') {
         $response = JSON::PP->new->utf8->encode($return->{'content'});
     } else {
-        $response = $return->{'content'}
+        $response = $return->{'content'};
     }
     print $response;
 }
