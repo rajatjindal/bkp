@@ -18,7 +18,6 @@ function getCookie(cname) {
 var displayModules = function () {
     var modules = getCookie("modules").split(',');
     if (modules.length <= 0 || (modules.length == 1 && modules[0] == "")) {
-        alert("here");
         window.location = "/bkp/login.html";
         return;
     }
@@ -64,7 +63,7 @@ var displayJobs = function (data) {
             jQuery.each(rows, function () {
                 var value = this;
                 var rowId = "row_" + rowCount;
-                $( "<tr id='row_" + rowCount + "'></tr>" ).appendTo( "#datatable" );
+                $("<tr id='row_" + rowCount + "'></tr>" ).appendTo( "#datatable" );
                 $("<td>" + value['Job Name'] + "</td>").appendTo("#" + rowId);   
                 $("<td>" + value['Job Desc'] + "</td>").appendTo("#" + rowId);   
                 $("<td>" + value['No of sheets to be printed'] + "</td>").appendTo("#" + rowId);   
