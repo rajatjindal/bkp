@@ -17,6 +17,7 @@ function getCookie(cname) {
 
 var addJobsListener = function (obj, moduleName) {
     obj.on("click", function(){
+        getHeaders(moduleName);
         getJobs(moduleName);
     });
 }
@@ -32,7 +33,8 @@ var displayModules = function () {
         addJobsListener(obj, modules[i]);
         obj.appendTo( "#modules" );
     }
-    
+   
+   getHeaders(modules[0]); 
    getJobs(modules[0]);
 }
 
@@ -61,10 +63,38 @@ var getJobs = function (moduleName) {
     });    
 }
 
-var displayJobs = function (data) {
+var getHeaders = function (moduleName) {
+    var form_data = JSON.stringify({
+        "module": moduleName
+    });
+    var form_url = "/cgi-bin/index.pl/getHeaders";
+    var form_method = "POST";
+    $.ajax({
+        url: form_url, 
+        type: form_method,      
+        data: form_data,     
+        cache: false,
+        beforeSend: function(xhr){xhr.setRequestHeader('Content-Type', 'application/json');},
+        success: function(data, textStatus, xhr) {
+            displayHeaders(data);
+        }
+    });    
+}
+
+var displayHeaders = function (data) {
     $("#datatable").remove();
-    $( "<table id='datatable' class='table table-bordered'></table>" ).appendTo( "#starter-template" );
-    $( "<tr id='header'><th> Job Name</th> <th> Job Desc </th> <th> No of sheets to be printed </th> <th> Start Time</th> <th> End Time </th> <th> No of sheets printed</th> </tr>" ).appendTo( "#datatable" );
+    $( "<table id='datatable' class='table table-bordered'><tr id='header'></tr></table>" ).appendTo( "#starter-template" );
+    jQuery.each(data, function(){
+        $("<th> " + this + "</th>").appendTo( "#header" );   
+    });
+    //$( "<tr id='header'><th> Job Name</th> <th> Job Desc </th> <th> Number requested </th> <th> Start Time</th> <th> End Time </th> <th> Number Achieved</th> </tr>" ).appendTo( "#datatable" );
+    
+}
+
+var displayJobs = function (data) {
+    //$("#datatable").remove();
+    //$( "<table id='datatable' class='table table-bordered'></table>" ).appendTo( "#starter-template" );
+    //$( "<tr id='header'><th> Job Name</th> <th> Job Desc </th> <th> Number requested </th> <th> Start Time</th> <th> End Time </th> <th> Number Achieved</th> </tr>" ).appendTo( "#datatable" );
     var rowCount = 0;
     jQuery.each(data, function () {
         jQuery.each(this, function(machineType, rows) {
@@ -89,10 +119,10 @@ var displayJobs = function (data) {
                 
                 $("<td>" + value['Job Name'] + "</td>").appendTo("#" + rowId);   
                 $("<td>" + value['Job Desc'] + "</td>").appendTo("#" + rowId);   
-                $("<td>" + value['No of sheets to be printed'] + "</td>").appendTo("#" + rowId);   
+                $("<td>" + value['Number requested'] + "</td>").appendTo("#" + rowId);   
                 $("<td><input id=timepicker1 type=text class='input-small' value='" + value['Job put on the machine at'] + "'><span class='add-on'><i class='icon-time'></i></span></td>").appendTo("#" + rowId);   
                 $("<td>" + value['Job put off the machine at'] + "</td>").appendTo("#" + rowId);   
-                $("<td>" + value['No of sheets Printed'] + "</td>").appendTo("#" + rowId);
+                $("<td>" + value['Number Achieved'] + "</td>").appendTo("#" + rowId);
             })
         })
     }); 

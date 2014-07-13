@@ -32,4 +32,18 @@ sub get_jobs {
     return { code => 200, content => $data};
 }
 
+sub get_headers{
+    my $self = shift;
+    my $args = shift;
+    
+    if (!$$args{'module'}) {
+        return {code => 400, content => "module missing"}
+    }
+    
+    my $file = "data/modules/$$args{'module'}/headers.yaml";
+    -e $file || return { code => 404, content => "No header information found for $$args{'module'}"};
+    my $data = YAML::LoadFile($file);
+    return { code => 200, content => $data};
+}
+
 1;

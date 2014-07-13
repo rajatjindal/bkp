@@ -1,75 +1,75 @@
  - Komori Printing Machine:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
  - Mitsubhishi Printing Machine:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
  - 2 Color Printing Machine:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
-      No of sheets to be printed: 120
+      Number requested: 120
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
-      No of sheets Printed: 80
+      Number Achieved: 80
