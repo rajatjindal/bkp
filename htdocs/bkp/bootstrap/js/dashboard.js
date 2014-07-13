@@ -15,6 +15,12 @@ function getCookie(cname) {
     return "";
 }
 
+var addJobsListener = function (obj, moduleName) {
+    obj.on("click", function(){
+        getJobs(moduleName);
+    });
+}
+
 var displayModules = function () {
     var modules = getCookie("modules").split(',');
     if (modules.length <= 0 || (modules.length == 1 && modules[0] == "")) {
@@ -22,10 +28,12 @@ var displayModules = function () {
         return;
     }
     for(var i=0; i<modules.length; i++) {
-        $( "<li><a href='#" + modules[i] + "'>" + modules[i] + "</a></li>" ).appendTo( "#modules" );
+        var obj = $( "<li><a href='#" + modules[i] + "'>" + modules[i] + "</a></li>" );
+        addJobsListener(obj, modules[i]);
+        obj.appendTo( "#modules" );
     }
     
-    getJobs(modules[0]);
+   getJobs(modules[0]);
 }
 
 var getJobs = function (moduleName) {
@@ -33,7 +41,7 @@ var getJobs = function (moduleName) {
     var day = d.getDate(); if (day <=9) { day = "0" + day }
     var month = d.getMonth() + 1; if (month <=9) { month = "0" + month }
     //var date = month + "-" + day + "-" + d.getUTCFullYear();
-    var date = month + "-" + "05" + "-" + d.getUTCFullYear();
+    var date = month + "-" + "14" + "-" + d.getUTCFullYear();
     
     var form_data = JSON.stringify({
         "date": date,
@@ -54,6 +62,7 @@ var getJobs = function (moduleName) {
 }
 
 var displayJobs = function (data) {
+    $("#datatable").remove();
     $( "<table id='datatable' class='table table-bordered'></table>" ).appendTo( "#starter-template" );
     $( "<tr id='header'><th> Job Name</th> <th> Job Desc </th> <th> No of sheets to be printed </th> <th> Start Time</th> <th> End Time </th> <th> No of sheets printed</th> </tr>" ).appendTo( "#datatable" );
     var rowCount = 0;
