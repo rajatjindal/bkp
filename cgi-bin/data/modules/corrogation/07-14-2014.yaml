@@ -1,4 +1,4 @@
- - NIKKO DIE CUT MACHINE:
+ - CORROUGATION 52in:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
       Number requested: 120
@@ -23,7 +23,7 @@
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
       Number Achieved: 80
- - MANUAL BIG CUT MACHINE-I:
+ - CORROUGATION 42in:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
       Number requested: 120
@@ -48,7 +48,7 @@
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
       Number Achieved: 80
- - MANUAL BIG CUT MACHINE-II:
+ - CORROUGATION 36in:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
       Number requested: 120
@@ -73,7 +73,7 @@
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
       Number Achieved: 80
- - MANUAL BIG CUT MACHINE-III:
+ - LAMINATOR:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
       Number requested: 120
@@ -98,7 +98,7 @@
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
       Number Achieved: 80
- - MANUAL SMALL CUT MACHINE-I:
+ - MANUAL PASATING:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
       Number requested: 120

@@ -1,4 +1,4 @@
- - NIKKO DIE CUT MACHINE:
+ - FOLDER GLUER PAKTECK:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
       Number requested: 120
@@ -23,7 +23,7 @@
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
       Number Achieved: 80
- - MANUAL BIG CUT MACHINE-I:
+ - FOLDER GLUER BOBS:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
       Number requested: 120
@@ -48,7 +48,7 @@
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
       Number Achieved: 80
- - MANUAL BIG CUT MACHINE-II:
+ - BOX PASTING MACHINE:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
       Number requested: 120
@@ -73,7 +73,7 @@
       Job put on the machine at: "2014-07-14 04:40"
       Job put off the machine at: "2014-07-14 04:40"
       Number Achieved: 80
- - MANUAL BIG CUT MACHINE-III:
+ - MANUAL SIDE PASTING:
     - Job Name: "Job a"
       Job Desc: "Job Desc B"
       Number requested: 120
