@@ -106,7 +106,7 @@ var displayJobs = function (data) {
             var buttonTH = "buttonth_" + rowCount;
             $( "<tr id='row_" + rowCount + "'><th>" + machineType + "</th><th id=" + buttonTH + "></th><th colspan=4>&nbsp;</th></tr>" ).appendTo( $("table").find('[data-machineType="' + machineType + '"]'));
             
-            $("<button class='btn btn-default align-left' type='submit'>New</button>").appendTo("#" + buttonTH);
+            $("<button class='btn btn-default align-left' type='submit'>New</button>").on('click', function(e) { e.preventDefault(); editJob();}).appendTo("#" + buttonTH);
             $("<button class='btn btn-default align-left' type='submit'>Edit</button>").appendTo("#" + buttonTH);
             $("<button class='btn btn-default align-left' type='submit'>Delete</button>").appendTo("#" + buttonTH);
             
@@ -115,22 +115,42 @@ var displayJobs = function (data) {
                 
                 rowCount = rowCount + 1;
                 var rowId = "row_" + rowCount;
-                $("<tr id='row_" + rowCount + "'></tr>" ).appendTo( "#datatable" );
+                $("<tr name='data' id='row_" + rowCount + "'></tr>" ).appendTo( "#datatable" );
                 
-                $("<td>" + value['Job Name'] + "</td>").appendTo("#" + rowId);   
-                $("<td>" + value['Job Desc'] + "</td>").appendTo("#" + rowId);   
-                $("<td>" + value['Number requested'] + "</td>").appendTo("#" + rowId);   
-                $("<td><input id=timepicker1 type=text class='input-small' value='" + value['Job put on the machine at'] + "'><span class='add-on'><i class='icon-time'></i></span></td>").appendTo("#" + rowId);   
-                $("<td>" + value['Job put off the machine at'] + "</td>").appendTo("#" + rowId);   
-                $("<td>" + value['Number Achieved'] + "</td>").appendTo("#" + rowId);
+                $("<td name='Job Name'>" + value['Job Name'] + "</td>").appendTo("#" + rowId);   
+                $("<td name='Job Desc'>" + value['Job Desc'] + "</td>").appendTo("#" + rowId);   
+                $("<td name='Number requested'>" + value['Number requested'] + "</td>").appendTo("#" + rowId);   
+                $("<td name='Job put on the machine at'><input id=timepicker1 type=text class='input-small' value='" + value['Job put on the machine at'] + "'><span class='add-on'><i class='icon-time'></i></span></td>").appendTo("#" + rowId);   
+                $("<td name='Job put off the machine at'>" + value['Job put off the machine at'] + "</td>").appendTo("#" + rowId);   
+                $("<td name='Number Achieved'>" + value['Number Achieved'] + "</td>").appendTo("#" + rowId);
             })
         })
     }); 
-    $('#datatable tr').on('click', function(event) {
-        $(this).addClass('highlight').siblings().removeClass('highlight');
+    $('#datatable tr[name="data"]').on('click', function(event) {
+        $(this).addClass('success').siblings().removeClass('success');
     });
     
     $('#timepicker1').timepicker();
+}
+
+function editJob() {
+    var idd = $('#datatable tr[class="success"]').attr('id');
+    $("#editdata").remove();
+    $("<div id='editdata' style='display:none'><table id='editdatatable' class='table table-bordered'></table></div>").appendTo("body");
+    var rows = new Array();
+    rows = $("#" + idd + " td");
+    if (rows.length <=0) {
+        alert("Select atleast one row to edit");
+        return false;
+    }
+    for(var i = 0; i < rows.length; i++) {
+        var o = rows[i];
+       $("<tr><td>" + $(o).attr('name') + "</td><td id='" + $(o).attr('name') + "'><input value='" + $(o).text() + "</input></td></tr>").appendTo("#editdatatable");
+    }
+    $.blockUI({
+            message: $('#editdata')
+        });
+    setTimeout($.unblockUI, 2000);
 }
 
 $(document).ready(function(e) {

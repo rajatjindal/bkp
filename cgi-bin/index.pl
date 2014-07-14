@@ -56,6 +56,12 @@ sub post {
     } elsif ($path =~ '/getHeaders') {
         my $module = Modules->new();
         $return = $module->get_headers($args);
+    } elsif($path =~ '/addJob') {
+        my $module = Modules->new();
+        $return = $module->add_job($args);
+    } elsif($path =~ '/editJob') {
+        my $module = Modules->new();
+        $return = $module->edit_job($args);
     }
     print_response($return, $path);
 }

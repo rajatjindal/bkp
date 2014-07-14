@@ -1,125 +1,132 @@
- - NIKKO DIE CUT MACHINE:
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
-      Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+---
+- NIKKO DIE CUT MACHINE:
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
- - MANUAL BIG CUT MACHINE-I:
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: NEW2desc
+      Job Name: NEW1
+      Job put off the machine at: ''
+      Job put on the machine at: ''
+      Number achieved: ''
+      Number requested: 100
+- MANUAL BIG CUT MACHINE-I:
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
- - MANUAL BIG CUT MACHINE-II:
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+- MANUAL BIG CUT MACHINE-II:
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
- - MANUAL BIG CUT MACHINE-III:
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+- MANUAL BIG CUT MACHINE-III:
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
- - MANUAL SMALL CUT MACHINE-I:
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+- MANUAL SMALL CUT MACHINE-I:
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
+      Number requested: 120
