@@ -136,7 +136,7 @@ var displayJobs = function (data) {
 function editJob() {
     var idd = $('#datatable tr[class="success"]').attr('id');
     $("#editdata").remove();
-    $("<div id='editdata' style='display:none'><table id='editdatatable' class='table table-bordered'></table></div>").appendTo("body");
+    $("<div id='editdata' style='display:none'><p> Edit Job </p><table id='editdatatable' class='table table-bordered' style='width: 80%; height: 80%; margin: auto;'></table></div>").appendTo("body");
     var rows = new Array();
     rows = $("#" + idd + " td");
     if (rows.length <=0) {
@@ -145,12 +145,13 @@ function editJob() {
     }
     for(var i = 0; i < rows.length; i++) {
         var o = rows[i];
-       $("<tr><td>" + $(o).attr('name') + "</td><td id='" + $(o).attr('name') + "'><input value='" + $(o).text() + "</input></td></tr>").appendTo("#editdatatable");
+       $("<tr><td>" + $(o).attr('name') + "</td><td x=y id='" + $(o).attr('name') + "'><input type=text value='" + $(o).text() + "'></input></td></tr>").appendTo("#editdatatable");
     }
+    $("<button class='btn btn-default align-left' type='submit'>Submit</button>").appendTo("#editdata");
+    $("<button class='btn btn-default align-left' type='cancel'>Cancel</button>").appendTo("#editdata");
     $.blockUI({
-            message: $('#editdata')
-        });
-    setTimeout($.unblockUI, 2000);
+        message: $('#editdata')
+    });
 }
 
 $(document).ready(function(e) {
