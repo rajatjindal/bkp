@@ -192,6 +192,61 @@ sub edit_job {
     return {code => 400, content => "category: ".$args->{'category'}." not found for module: ".$args->{'module'}}
 }
 
+sub delete_job {
+    my $self = shift;
+    my $args = shift;
+    
+    my @mandatory = ("Job Name");
+    
+    if (!defined $args->{'module'}) {
+        return {code => 400, content => "module is missing"}
+    }
+    
+    if (!defined $args->{'category'}) {
+        return {code => 400, content => "category is missing"}
+    }
+    
+    foreach my $mField(@mandatory) {
+        if (!defined $args->{$mField}) {
+            return {code => 400, content => "$mField is mandatory"}
+        }
+    }
+    
+    if (!defined $args->{'date'}) {
+        return {code => 400, content => "date is missing"}
+    }
+    
+    my $file = "data/modules/$$args{'module'}/$$args{'date'}.yaml";
+    -e $file || return { code => 404, content => "No header information found for $$args{'module'}"};
+    
+    my $data = YAML::LoadFile($file);
+    if ($self->is_locked($file)) {
+        return {code => 409, content => "someone else is editing this too. Please try in some seconds."}
+    }
+    
+    $self->lock_file($file);
+    #return {code => 200, content => $data};
+    foreach my $d (@{$data}) {
+        my $category = (keys %{$d})[0];
+        if ($category eq $args->{'category'}) {
+            my $index = 0;
+            foreach my $job (@{$d->{$category}}) {
+                if ($job->{'Job Name'} eq $args->{'Job Name'}) {
+                    delete $d->{$category}->[$index];
+                    YAML::DumpFile($file, $data);
+                    $self->release_file($file);
+                    return {code => 204, content => "deleted successfully"}
+                }
+                $index++;
+            }
+            $self->release_file($file);
+            return {code => 400, content => $args->{'Job Name'}." not found in ". "category: ".$args->{'category'}.", module: ".$args->{'module'}}
+        }
+    }
+    $self->release_file($file);
+    return {code => 400, content => "category: ".$args->{'category'}." not found for module: ".$args->{'module'}}
+}
+
 sub is_locked {
     my $self = shift;
     my $file = shift;

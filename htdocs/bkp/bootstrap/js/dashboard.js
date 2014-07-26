@@ -68,6 +68,64 @@ var getJobs = function (moduleName) {
     });    
 }
 
+var submitAddJob = function(machineType) {
+    var moduleName = $("#current_module").val();
+    var form_data = JSON.stringify({
+        "category": machineType,
+        "module": moduleName,
+        "date": currentDate(),
+        "Job Name": $("[id='Job Name']").val(),
+        "Job Desc": $("[id='Job Desc']").val(),
+        "Number requested": $("[id='Number requested']").val(),
+        "Job put on the machine at": $("[id='Job put on the machine at']").val(),
+        "Job put off the machine at": $("[id='Job put off the machine at']").val(),
+        "Number Achieved": $("[id='Number Achieved']").val(),
+    });
+    
+    var form_url = "/cgi-bin/index.pl/addJob";
+    var form_method = "POST";
+    $.ajax({
+        url: form_url, 
+        type: form_method,      
+        data: form_data,
+        cache: false,
+        beforeSend: function(xhr){xhr.setRequestHeader('Content-Type', 'application/json');},
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError)
+        },
+        success: function(msg) {
+            $.unblockUI();
+            getHeaders(moduleName);
+        }
+    });
+}
+
+var submitDeleteJob = function(machineType, jobName) {
+    var moduleName = $("#current_module").val();
+    var form_data = JSON.stringify({
+        "category": machineType,
+        "module": moduleName,
+        "date": currentDate(),
+        "Job Name": jobName
+    });
+    
+    var form_url = "/cgi-bin/index.pl/deleteJob";
+    var form_method = "POST";
+    $.ajax({
+        url: form_url, 
+        type: form_method,      
+        data: form_data,
+        cache: false,
+        beforeSend: function(xhr){xhr.setRequestHeader('Content-Type', 'application/json');},
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError)
+        },
+        success: function(msg) {
+            $.unblockUI();
+            getHeaders(moduleName);
+        }
+    });
+}
 var submitEditJob = function(machineType) {
     var moduleName = $("#current_module").val();
     var form_data = JSON.stringify({
@@ -145,9 +203,9 @@ var displayJobs = function (data) {
             var buttonTH = "buttonth_" + rowCount;
             $( "<tr id='row_" + rowCount + "'><th>" + machineType + "</th><th id=" + buttonTH + "></th><th colspan=4>&nbsp;</th></tr>" ).appendTo( $("table").find('[data-machineType="' + machineType + '"]'));
             
-            $("<button class='btn btn-default align-left' type='submit'>New</button>").on('click', function(e) { e.preventDefault(); editJob(machineType);}).appendTo("#" + buttonTH);
-            $("<button class='btn btn-default align-left' type='submit'>Edit</button>").appendTo("#" + buttonTH);
-            $("<button class='btn btn-default align-left' type='submit'>Delete</button>").appendTo("#" + buttonTH);
+            $("<button class='btn btn-default align-left' type='submit'>New</button>").on('click', function(e) { e.preventDefault(); addJob(machineType);}).appendTo("#" + buttonTH);
+            $("<button class='btn btn-default align-left' type='submit'>Edit</button>").on('click', function(e) { e.preventDefault(); editJob(machineType);}).appendTo("#" + buttonTH);
+            $("<button class='btn btn-default align-left' type='submit'>Delete</button>").on('click', function(e) { e.preventDefault(); deleteJob(machineType);}).appendTo("#" + buttonTH);
             
             jQuery.each(rows, function () {
                 var value = this;
@@ -173,8 +231,44 @@ var displayJobs = function (data) {
     $('#timepicker1').timepicker();
 }
 
+function deleteJob(machineType) {
+    var idd = $('#datatable tr[class="success"][name="' + machineType + '"]').attr('id');
+    $("#editdata").remove();
+    $("<div id='editdata' style='display:none'><p> Edit Job </p><table id='editdatatable' class='table table-bordered' style='width: 80%; height: 80%; margin: auto;'></table></div>").appendTo("body");
+    var rows = new Array();
+    rows = $("#" + idd + " td");
+    if (rows.length <=0) {
+        alert("Select atleast one row to delete");
+        return false;
+    }
+    if (confirm("Are you sure you want to delete this job")) {
+        var jobName = $("#" + idd + " td[name='Job Name']").text();
+        submitDeleteJob(machineType, jobName);
+    }
+}
+
+
+function addJob(machineType) {
+    var idd = $('#datatable tr[name="' + machineType + '"]').first().attr('id');
+    $("#editdata").remove();
+    $("<div id='editdata' style='display:none'><p> Add new Job </p><table id='editdatatable' class='table table-bordered' style='width: 80%; height: 80%; margin: auto;'></table></div>").appendTo("body");
+    var rows = new Array();
+    rows = $("#" + idd + " td").attr('name');
+    if (rows === undefined || rows.length <=0) {
+        rows = new Array("Job Name", "Job Desc", "Number requested", "Job put on the machine at", "Job put off the machine at", "Number Achieved");
+    }
+    for(var i = 0; i < rows.length; i++) {
+       $("<tr><td>" + rows[i] + "</td><td name=edit><input id='" + rows[i] + "' type=text></input></td></tr>").appendTo("#editdatatable");
+    }
+    $("<button class='btn btn-default align-left' type='submit'>Submit</button>").on('click', function(e) { e.preventDefault(); submitAddJob(machineType);}).appendTo("#editdata");
+    $("<button class='btn btn-default align-left' type='cancel'>Cancel</button>").on('click', function(e) { e.preventDefault(); $.unblockUI();}).appendTo("#editdata");
+    $.blockUI({
+        message: $('#editdata')
+    });
+}
+
 function editJob(machineType) {
-    var idd = $('#datatable tr[class="success"][name="' + machineType + '"').attr('id');
+    var idd = $('#datatable tr[class="success"][name="' + machineType + '"]').attr('id');
     $("#editdata").remove();
     $("<div id='editdata' style='display:none'><p> Edit Job </p><table id='editdatatable' class='table table-bordered' style='width: 80%; height: 80%; margin: auto;'></table></div>").appendTo("body");
     var rows = new Array();
@@ -193,6 +287,7 @@ function editJob(machineType) {
         message: $('#editdata')
     });
 }
+
 
 $(document).ready(function(e) {
     displayModules();

@@ -62,6 +62,9 @@ sub post {
     } elsif($path =~ '/editJob') {
         my $module = Modules->new();
         $return = $module->edit_job($args);
+    } elsif($path =~ '/deleteJob') {
+        my $module = Modules->new();
+        $return = $module->delete_job($args);
     }
     print_response($return, $path);
 }
