@@ -69,12 +69,13 @@ sub post {
 sub print_response {
     my $return = shift;
     my $path = shift;
-    print $q->header(-status => $return->{'code'}, -Content_type => 'application/json');
     
     my $response;
     if (ref($return->{'content'}) && ref($return->{'content'}) ne 'SCALAR') {
+        print $q->header(-status => $return->{'code'}, -Content_type => 'application/json');
         $response = JSON::PP->new->utf8->pretty->encode($return->{'content'});
     } else {
+        print $q->header(-status => $return->{'code'}, -Content_type => 'text/plain');
         $response = $return->{'content'};
     }
     print $response;

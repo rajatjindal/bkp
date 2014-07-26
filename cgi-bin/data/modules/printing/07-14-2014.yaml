@@ -1,75 +1,76 @@
- - Komori Printing Machine:
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
-      Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+---
+- Komori Printing Machine:
+    - Job Desc: printing_2
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
- - Mitsubhishi Printing Machine:
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+- Mitsubhishi Printing Machine:
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
- - 2 Color Printing Machine:
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+- 2 Color Printing Machine:
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
-    - Job Name: "Job a"
-      Job Desc: "Job Desc B"
       Number requested: 120
-      Job put on the machine at: "2014-07-14 04:40"
-      Job put off the machine at: "2014-07-14 04:40"
+    - Job Desc: Job Desc B
+      Job Name: Job a
+      Job put off the machine at: 2014-07-14 04:40
+      Job put on the machine at: 2014-07-14 04:40
       Number Achieved: 80
+      Number requested: 120
