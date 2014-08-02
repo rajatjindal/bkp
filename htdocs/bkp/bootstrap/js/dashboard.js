@@ -20,6 +20,8 @@ var addJobsListener = function (obj, moduleName) {
         getHeaders(moduleName);
         $("#current_module").remove();
         $("<input id='current_module' type=hidden value='" + moduleName + "'>").appendTo("body");
+        $("li[class=active]").removeClass("active");
+        $("#" + moduleName).addClass("active");
     });
 }
 
@@ -30,12 +32,13 @@ var displayModules = function () {
         return;
     }
     for(var i=0; i<modules.length; i++) {
-        var obj = $( "<li><a href='#" + modules[i] + "'>" + modules[i] + "</a></li>" );
+        var obj = $( "<li id='" + modules[i] + "'><a href='#" + modules[i] + "'>" + modules[i] + "</a></li>" );
         addJobsListener(obj, modules[i]);
         obj.appendTo( "#modules" );
     }
    
-   getHeaders(modules[0]); 
+   getHeaders(modules[0]);
+   $("#" + modules[0]).addClass("active");
    $("#current_module").remove();
    $("<input id='current_module' type=hidden value='" + modules[0] + "'>").appendTo("body");
 }
@@ -45,7 +48,7 @@ function currentDate() {
     var day = d.getDate(); if (day <=9) { day = "0" + day }
     var month = d.getMonth() + 1; if (month <=9) { month = "0" + month }
     //var date = month + "-" + day + "-" + d.getUTCFullYear();
-    var date = month + "-" + "14" + "-" + d.getUTCFullYear();
+    var date = "07" + "-" + "14" + "-" + d.getUTCFullYear();
     return date;
 }
 var getJobs = function (moduleName) {
@@ -201,7 +204,7 @@ var displayJobs = function (data) {
             rowCount = rowCount + 1;
             rowId = "row_" + rowCount;
             var buttonTH = "buttonth_" + rowCount;
-            $( "<tr id='row_" + rowCount + "'><th>" + machineType + "</th><th id=" + buttonTH + "></th><th colspan=4>&nbsp;</th></tr>" ).appendTo( $("table").find('[data-machineType="' + machineType + '"]'));
+            $( "<tr id='row_" + rowCount + "'><th colspan=2>" + machineType + "</th><th colspan=3>&nbsp;</th><th width=60% class='align-right' id=" + buttonTH + "></th></tr>" ).appendTo( $("table").find('[data-machineType="' + machineType + '"]'));
             
             $("<button class='btn btn-default align-left' type='submit'>New</button>").on('click', function(e) { e.preventDefault(); addJob(machineType);}).appendTo("#" + buttonTH);
             $("<button class='btn btn-default align-left' type='submit'>Edit</button>").on('click', function(e) { e.preventDefault(); editJob(machineType);}).appendTo("#" + buttonTH);
@@ -217,18 +220,18 @@ var displayJobs = function (data) {
                 $("<td name='Job Name'>" + value['Job Name'] + "</td>").appendTo("#" + rowId);   
                 $("<td name='Job Desc'>" + value['Job Desc'] + "</td>").appendTo("#" + rowId);   
                 $("<td name='Number requested'>" + value['Number requested'] + "</td>").appendTo("#" + rowId);   
-                $("<td name='Job put on the machine at'><input id=timepicker1 type=text class='input-small' value='" + value['Job put on the machine at'] + "'><span class='add-on'><i class='icon-time'></i></span></td>").appendTo("#" + rowId);   
+                $("<td name='Job put on the machine at'> " + value['Job put on the machine at'] + "</td>").appendTo("#" + rowId);   
                 $("<td name='Job put off the machine at'>" + value['Job put off the machine at'] + "</td>").appendTo("#" + rowId);   
                 $("<td name='Number Achieved'>" + value['Number Achieved'] + "</td>").appendTo("#" + rowId);
             
                 $('#datatable tr[name="' + machineType + '"]').on('click', function(event) {
                     $(this).addClass('success').siblings().removeClass('success');
                 });
+                
             })
         })
     }); 
     
-    $('#timepicker1').timepicker();
 }
 
 function deleteJob(machineType) {
@@ -253,12 +256,20 @@ function addJob(machineType) {
     $("#editdata").remove();
     $("<div id='editdata' style='display:none'><p> Add new Job </p><table id='editdatatable' class='table table-bordered' style='width: 80%; height: 80%; margin: auto;'></table></div>").appendTo("body");
     var rows = new Array();
-    rows = $("#" + idd + " td").attr('name');
-    if (rows === undefined || rows.length <=0) {
+    $("#" + idd).find('td').each(function() {
+        rows.push(this.getAttribute('name'));
+    });
+    if (rows === undefined || rows.length <= 0) {
         rows = new Array("Job Name", "Job Desc", "Number requested", "Job put on the machine at", "Job put off the machine at", "Number Achieved");
     }
+    
     for(var i = 0; i < rows.length; i++) {
-       $("<tr><td>" + rows[i] + "</td><td name=edit><input id='" + rows[i] + "' type=text></input></td></tr>").appendTo("#editdatatable");
+        if (rows[i] == "Job put on the machine at" || rows[i] == "Job put off the machine at") {
+           $("<tr><td>" + rows[i] + "</td><td name=edit><input <input name='setTimeExample' type='text' class='time ui-timepicker-input' autocomplete='off' id='" + rows[i] + "'></input></td></tr>").appendTo("#editdatatable");
+           $('input[name="setTimeExample"]').timepicker();
+        } else {
+           $("<tr><td>" + rows[i] + "</td><td name=edit><input id='" + rows[i] + "' type=text></input></td></tr>").appendTo("#editdatatable");
+        }
     }
     $("<button class='btn btn-default align-left' type='submit'>Submit</button>").on('click', function(e) { e.preventDefault(); submitAddJob(machineType);}).appendTo("#editdata");
     $("<button class='btn btn-default align-left' type='cancel'>Cancel</button>").on('click', function(e) { e.preventDefault(); $.unblockUI();}).appendTo("#editdata");
@@ -279,7 +290,14 @@ function editJob(machineType) {
     }
     for(var i = 0; i < rows.length; i++) {
         var o = rows[i];
-       $("<tr><td>" + $(o).attr('name') + "</td><td name=edit><input id='" + $(o).attr('name') + "' type=text value='" + $(o).text() + "'></input></td></tr>").appendTo("#editdatatable");
+        var n = rows[i].getAttribute('name');
+        var t = o.innerText || o.textContent || o.value;
+        if (n == "Job put on the machine at" || n == "Job put off the machine at") {
+           $("<tr><td>" + $(o).attr('name') + "</td><td name=edit><input id='" + $(o).attr('name') + "' name='setTimeExample' type='text' class='time ui-timepicker-input' autocomplete='off' id='" + $(o).attr('name') + "' value='" + t + "'></input></td></tr>").appendTo("#editdatatable");
+           $('input[name="setTimeExample"]').timepicker();
+        } else {
+           $("<tr><td>" + n + "</td><td name=edit><input id='" + n + "' type=text value='" + t + "'></input></td></tr>").appendTo("#editdatatable");
+        }
     }
     $("<button class='btn btn-default align-left' type='submit'>Submit</button>").on('click', function(e) { e.preventDefault(); submitEditJob(machineType);}).appendTo("#editdata");
     $("<button class='btn btn-default align-left' type='cancel'>Cancel</button>").on('click', function(e) { e.preventDefault(); $.unblockUI();}).appendTo("#editdata");

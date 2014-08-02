@@ -1,52 +1,8 @@
 ---
 - STICHING SECTION:
-    - ~
-    - Job Desc: Job Desc B
-      Job Name: Job a
-      Job put off the machine at: 2014-07-14 04:40
-      Job put on the machine at: 2014-07-14 04:40
-      Number Achieved: 80
-      Number requested: 120
-    - Job Desc: Job Desc B
-      Job Name: Job a
-      Job put off the machine at: 2014-07-14 04:40
-      Job put on the machine at: 2014-07-14 04:40
-      Number Achieved: 80
-      Number requested: 120
-    - Job Desc: Job Desc B
-      Job Name: Job a
-      Job put off the machine at: 2014-07-14 04:40
-      Job put on the machine at: 2014-07-14 04:40
-      Number Achieved: 80
-      Number requested: 120
-    - Job Desc: New die job desc
-      Job Name: New_die_job
-      Job put off the machine at: ''
-      Job put on the machine at: ''
-      Number Achieved: 200
+    - Job Desc: Desc
+      Job Name: BKP_D1
+      Job put off the machine at: 2:30am
+      Job put on the machine at: 12:30am
+      Number Achieved: 90
       Number requested: 100
-- MANUAL PASTING:
-    - Job Desc: Job Desc B
-      Job Name: Job a
-      Job put off the machine at: 2014-07-14 04:40
-      Job put on the machine at: 2014-07-14 04:40
-      Number Achieved: 80
-      Number requested: 120
-    - Job Desc: Job Desc B
-      Job Name: Job a
-      Job put off the machine at: 2014-07-14 04:40
-      Job put on the machine at: 2014-07-14 04:40
-      Number Achieved: 80
-      Number requested: 120
-    - Job Desc: Job Desc B
-      Job Name: Job a
-      Job put off the machine at: 2014-07-14 04:40
-      Job put on the machine at: 2014-07-14 04:40
-      Number Achieved: 80
-      Number requested: 120
-    - Job Desc: Job Desc B
-      Job Name: Job a
-      Job put off the machine at: 2014-07-14 04:40
-      Job put on the machine at: 2014-07-14 04:40
-      Number Achieved: 80
-      Number requested: 120

@@ -97,14 +97,14 @@ sub add_job {
             $temp{'Job Desc'} = $args->{'Job Desc'};
             $temp{'Number requested'} = $args->{'Number requested'};
             
-            if (exists $args->{'start date'}) {
-                $temp{'Job put on the machine at'} = $args->{'start date'};
+            if (exists $args->{'Job put on the machine at'}) {
+                $temp{'Job put on the machine at'} = $args->{'Job put on the machine at'};
             } else {
                 $temp{'Job put on the machine at'} = "";
             }
             
-            if (exists $args->{'end date'}) {
-                $temp{'Job put off the machine at'} = $args->{'end date'};
+            if (exists $args->{'Job put off the machine at'}) {
+                $temp{'Job put off the machine at'} = $args->{'Job put off the machine at'};
             } else {
                 $temp{'Job put off the machine at'} = "";
             }
@@ -143,6 +143,10 @@ sub edit_job {
         if (!defined $args->{$mField}) {
             return {code => 400, content => "$mField is mandatory"}
         }
+    }
+    
+    if (defined $args->{'Number Achieved'} && $args->{'Number Achieved'} > $args->{'Number requested'}) {
+        return {code => 400, content => "Number achieved more than number requested"};
     }
     
     if (!defined $args->{'date'}) {
@@ -232,7 +236,8 @@ sub delete_job {
             my $index = 0;
             foreach my $job (@{$d->{$category}}) {
                 if ($job->{'Job Name'} eq $args->{'Job Name'}) {
-                    delete $d->{$category}->[$index];
+                    splice(@{$d->{$category}}, $index, 1);
+                    #$d->{$category}->[$index] = undef;
                     YAML::DumpFile($file, $data);
                     $self->release_file($file);
                     return {code => 204, content => "deleted successfully"}
