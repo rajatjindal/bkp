@@ -29,6 +29,10 @@ sub get_jobs {
     
     my $file = "data/modules/$$args{'module'}/$$args{'date'}.yaml";
     
+    if(!-e $file) {
+    	system("cp data/modules/$$args{'module'}/template.yaml $file");
+    }
+    
     -e $file || return { code => 404, content => "No information found for $$args{'module'} for date $$args{'date'}"};
     my $data = YAML::LoadFile($file);
     
@@ -171,12 +175,12 @@ sub edit_job {
                     $job->{'Job Desc'} = $args->{'Job Desc'};
                     $job->{'Number requested'} = $args->{'Number requested'};
             
-                    if (exists $args->{'start date'}) {
-                        $job->{'Job put on the machine at'} = $args->{'start date'};
+                    if (exists $args->{'Job put on the machine at'}) {
+                        $job->{'Job put on the machine at'} = $args->{'Job put on the machine at'};
                     }
             
-                    if (exists $args->{'end date'}) {
-                        $job->{'Job put off the machine at'} = $args->{'end date'};
+                    if (exists $args->{'Job put off the machine at'}) {
+                        $job->{'Job put off the machine at'} = $args->{'Job put off the machine at'};
                     }
             
                     if (exists $args->{'Number Achieved'}) {

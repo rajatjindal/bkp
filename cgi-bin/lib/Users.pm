@@ -31,10 +31,11 @@ sub get_users {
         return {code => 401, content => "Invalid username or password"}
     }
     
-    if($$users{$$args{'email'}}{'auth'}{'password'} ne $$args{'password'}) {
+    my $user = $$users{$$args{'email'}};
+    if($user->{'auth'}{'password'} ne $$args{'password'}) {
         return {code => 401, content => "Invalid username or password"}
     }
-    return { code => 200, content => [keys $$users{$$args{'email'}}{'modules'}]};
+    return { code => 200, content => [keys %{$user->{'modules'}}]};
 }
 
 1;
