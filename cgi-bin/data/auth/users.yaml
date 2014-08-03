@@ -1,4 +1,4 @@
-'rjindal@r.com':
+'sjindal':
     modules: 
         printing:
             read: 1
@@ -22,21 +22,123 @@
         password: admin
         firstLoginChange: 0
     personal:
-        firstName: Rajat
+        firstName: Sanjay
         lastName: Jindal
-        designation: Director
-ssingla@r.com:
+'ssingla':
     modules: 
         printing:
             read: 1
             write: 1
-        store:
+        die:
             read: 1
-            write: 0
+            write: 1 
+        corrogation:
+            read: 1
+            write: 1
+        glue:
+            read: 1
+            write: 1
+        stiching:
+            read: 1
+            write: 1
+        dispatch:
+            read: 1
+            write: 1    
     auth: 
         password: admin
         firstLoginChange: 0
     personal:
-        firstName: Rajat
-        lastName: Jindal
-        designation: Director
+        firstName: Sandeep
+        lastName: Singla
+'dsingla':
+    modules: 
+        printing:
+            read: 1
+            write: 1
+        die:
+            read: 1
+            write: 1 
+        corrogation:
+            read: 1
+            write: 1
+        glue:
+            read: 1
+            write: 1
+        stiching:
+            read: 1
+            write: 1
+        dispatch:
+            read: 1
+            write: 1    
+    auth: 
+        password: admin
+        firstLoginChange: 0
+    personal:
+        firstName: Deepti
+        lastName: Singla
+'die':
+    modules: 
+        die:
+            read: 1
+            write: 1 
+    auth: 
+        password: admin
+        firstLoginChange: 0
+    personal:
+        firstName: Die
+        lastName: Team
+'printing':
+    modules: 
+        printing:
+            read: 1
+            write: 1
+    auth: 
+        password: admin
+        firstLoginChange: 0
+    personal:
+        firstName: Printing
+        lastName: Team
+'stitching':
+    modules:
+        stiching:
+            read: 1
+            write: 1
+    auth: 
+        password: admin
+        firstLoginChange: 0
+    personal:
+        firstName: Stitching
+        lastName: Team
+'corrogation':
+    modules: 
+        corrogation:
+            read: 1
+            write: 1
+    auth: 
+        password: admin
+        firstLoginChange: 0
+    personal:
+        firstName: Corrogation
+        lastName: Team
+'glue':
+    modules: 
+        glue:
+            read: 1
+            write: 1
+    auth: 
+        password: admin
+        firstLoginChange: 0
+    personal:
+        firstName: Glue
+        lastName: Team
+'dispatch':
+    modules: 
+        dispatch:
+            read: 1
+            write: 1    
+    auth: 
+        password: admin
+        firstLoginChange: 0
+    personal:
+        firstName: Dispatch
+        lastName: Team
