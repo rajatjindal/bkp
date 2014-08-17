@@ -1,0 +1,12 @@
+---
+- Folder Gluer Pakteck:
+    - endTime: 2:00am
+      jobCode: a
+      jobName: abc
+      numberCompleted: 11
+      numberRequested: 100
+      startTime: 12:30am
+- Folder Gluer Bobs: []
+- Box Pasting Machine: []
+- Manual Side Pasting: []
+- Manual Small Cut Machine-I: []

@@ -1,3 +1,6 @@
+var currentHeaders;
+var currentDisplayedDate;
+
 function setCookie(cname, cvalue, exhrs) {
     var d = new Date();
     d.setTime(d.getTime() + (exhrs*60*60*1000));
@@ -43,18 +46,42 @@ var displayModules = function () {
    $("<input id='current_module' type=hidden value='" + modules[0] + "'>").appendTo("body");
 }
 
-function currentDate() {
+function getCurrentDate() {
     var d = new Date();
     var day = d.getDate(); if (day <=9) { day = "0" + day }
     var month = d.getMonth() + 1; if (month <=9) { month = "0" + month }
     var date = month + "-" + day + "-" + d.getUTCFullYear();
-    //var date = "07" + "-" + "14" + "-" + d.getUTCFullYear();
+    var date = "08" + "-" + "03" + "-" + d.getUTCFullYear();
     return date;
 }
+
+function getTimeString () {
+    var d = currentDisplayedDate;
+    var day = d.getDate(); if (day <=9) { day = "0" + day }
+    var month = d.getMonth() + 1; if (month <=9) { month = "0" + month }
+    var date = month + "-" + day + "-" + d.getUTCFullYear();
+    //var date = "08" + "-" + "03" + "-" + d.getUTCFullYear();
+    return date;
+}
+
+function getDate (offset) {
+    var d = currentDisplayedDate;
+    
+    d.setDate(d.getDate() + offset); 
+
+    var day = d.getDate(); if (day <= 9) { day = "0" + day }
+    var month = d.getMonth() + 1; if (month <=9) { month = "0" + month }
+    var date = month + "-" + day + "-" + d.getUTCFullYear();
+    
+    currentDisplayedDate = d;
+    
+    return date;
+}
+
 var getJobs = function (moduleName) {
     
     var form_data = JSON.stringify({
-        "date": currentDate(),
+        "date": getTimeString(currentDisplayedDate),
         "module": moduleName
     });
     var form_url = "/cgi-bin/index.pl/getJobs";
@@ -76,13 +103,13 @@ var submitAddJob = function(machineType) {
     var form_data = JSON.stringify({
         "category": machineType,
         "module": moduleName,
-        "date": currentDate(),
-        "Job Name": $("[id='Job Name']").val(),
-        "Job Desc": $("[id='Job Desc']").val(),
-        "Number requested": $("[id='Number requested']").val(),
-        "Job put on the machine at": $("[id='Job put on the machine at']").val(),
-        "Job put off the machine at": $("[id='Job put off the machine at']").val(),
-        "Number Achieved": $("[id='Number Achieved']").val(),
+        "date": getTimeString(currentDisplayedDate),
+        "jobName": $("[id='jobName']").val(),
+        "jobCode": $("[id='jobCode']").val(),
+        "numberRequested": $("[id='numberRequested']").val(),
+        "startTime": $("[id='startTime']").val(),
+        "endTime": $("[id='endTime']").val(),
+        "numberCompleted": $("[id='numberCompleted']").val(),
     });
     
     var form_url = "/cgi-bin/index.pl/addJob";
@@ -108,8 +135,8 @@ var submitDeleteJob = function(machineType, jobName) {
     var form_data = JSON.stringify({
         "category": machineType,
         "module": moduleName,
-        "date": currentDate(),
-        "Job Name": jobName
+        "date": getTimeString(currentDisplayedDate),
+        "jobName": jobName
     });
     
     var form_url = "/cgi-bin/index.pl/deleteJob";
@@ -134,13 +161,13 @@ var submitEditJob = function(machineType) {
     var form_data = JSON.stringify({
         "category": machineType,
         "module": moduleName,
-        "date": currentDate(),
-        "Job Name": $("[id='Job Name']").val(),
-        "Job Desc": $("[id='Job Desc']").val(),
-        "Number requested": $("[id='Number requested']").val(),
-        "Job put on the machine at": $("[id='Job put on the machine at']").val(),
-        "Job put off the machine at": $("[id='Job put off the machine at']").val(),
-        "Number Achieved": $("[id='Number Achieved']").val(),
+        "date": getTimeString(currentDisplayedDate),
+        "jobName": $("[id='jobName']").val(),
+        "jobCode": $("[id='jobCode']").val(),
+        "numberRequested": $("[id='numberRequested']").val(),
+        "startTime": $("[id='startTime']").val(),
+        "endTime": $("[id='endTime']").val(),
+        "numberCompleted": $("[id='numberCompleted']").val(),
     });
     
     var form_url = "/cgi-bin/index.pl/editJob";
@@ -175,6 +202,7 @@ var getHeaders = function (moduleName) {
         cache: false,
         beforeSend: function(xhr){xhr.setRequestHeader('Content-Type', 'application/json');},
         success: function(data, textStatus, xhr) {
+            currentHeaders = data;
             displayHeaders(data);
             getJobs(moduleName);
         }
@@ -183,61 +211,73 @@ var getHeaders = function (moduleName) {
 
 var displayHeaders = function (data) {
     $("#datatable").remove();
-    $( "<table id='datatable' class='table table-bordered'><tr id='header'></tr></table>" ).appendTo( "#starter-template" );
-    jQuery.each(data, function(){
-        $("<th> " + this + "</th>").appendTo( "#header" );   
-    });
-    //$( "<tr id='header'><th> Job Name</th> <th> Job Desc </th> <th> Number requested </th> <th> Start Time</th> <th> End Time </th> <th> Number Achieved</th> </tr>" ).appendTo( "#datatable" );
+
+    $( "<table id='datatable' class='table table-bordered'><tr><th colspan=" + (data.length + 1) + ">" + getTimeString(currentDisplayedDate) + "</th></tr><tr id='header'></tr></table>" ).appendTo( "#starter-template" );
     
+    jQuery.each(data, function(){
+        $("<th> " + this['displayName'] + "</th>").appendTo( "#header" );   
+    });
+    $("<th></th>").appendTo( "#header" );
 }
 
 var displayJobs = function (data) {
-    //$("#datatable").remove();
-    //$( "<table id='datatable' class='table table-bordered'></table>" ).appendTo( "#starter-template" );
-    //$( "<tr id='header'><th> Job Name</th> <th> Job Desc </th> <th> Number requested </th> <th> Start Time</th> <th> End Time </th> <th> Number Achieved</th> </tr>" ).appendTo( "#datatable" );
     var rowCount = 0;
     jQuery.each(data, function () {
         jQuery.each(this, function(machineType, rows) {
             var rowId = "row_" + rowCount;
-            $( "<tr id='row_" + rowCount + "'><td colspan=6><table data-machinetype='" + machineType + "' class='table table-striped'></table></td></tr>").appendTo( "#datatable" );
+            $( "<tr id='row_" + rowCount + "'><td colspan=7><table data-machinetype='" + machineType + "' class='table table-striped'></table></td></tr>").appendTo( "#datatable" );
             
             rowCount = rowCount + 1;
             rowId = "row_" + rowCount;
             var buttonTH = "buttonth_" + rowCount;
-            $( "<tr id='row_" + rowCount + "'><th colspan=2>" + machineType + "</th><th colspan=3>&nbsp;</th><th width=60% class='align-right' id=" + buttonTH + "></th></tr>" ).appendTo( $("table").find('[data-machineType="' + machineType + '"]'));
             
-            $("<button class='btn btn-default align-left' type='submit'>New</button>").on('click', function(e) { e.preventDefault(); addJob(machineType);}).appendTo("#" + buttonTH);
-            $("<button class='btn btn-default align-left' type='submit'>Edit</button>").on('click', function(e) { e.preventDefault(); editJob(machineType);}).appendTo("#" + buttonTH);
-            $("<button class='btn btn-default align-left' type='submit'>Delete</button>").on('click', function(e) { e.preventDefault(); deleteJob(machineType);}).appendTo("#" + buttonTH);
+            //$( "<tr id='row_" + rowCount + "'><th colspan=2>" + machineType + "</th><th width=60% class='align-right' id=" + buttonTH + "></th><th colspan=5>&nbsp;</th></tr>" ).appendTo( $("table").find('[data-machineType="' + machineType + '"]'));
+            
+            $( "<tr id='row_" + rowCount + "'><th colspan=7 id=" + buttonTH + " >" + machineType + "&nbsp;&nbsp;</th></tr>" ).appendTo( $("table").find('[data-machineType="' + machineType + '"]'));
+            
+            //$("<button class='btn btn-primary align-left btn-xs' type='submit'>Create new</button>").on('click', function(e) { e.preventDefault(); addJob(machineType);}).appendTo("#" + buttonTH);
+            if(isAdmin()) {
+                $("<span class='glyphicon glyphicon-plus' data-toggle='tooltip' data-placement='right' title='Add new'></span>").on('click', function(e) { e.preventDefault(); addJob(machineType);}).appendTo("#" + buttonTH);
+            }
             
             jQuery.each(rows, function () {
                 var value = this;
                 
                 rowCount = rowCount + 1;
                 var rowId = "row_" + rowCount;
-                $("<tr name='" + machineType + "' id='row_" + rowCount + "'></tr>" ).appendTo( "#datatable" );
+                $("<tr name='" + machineType + "' id='row_" + rowCount + "' title='Double click to edit' data-toggle='tooltip' data-placement='top'></tr>" )
+                .on('dblclick', function(event) { editJob(rowId, machineType); $(this).addClass('success1').siblings().removeClass('success1'); })
+                .appendTo( "#datatable" );
                 
-                $("<td name='Job Name'>" + value['Job Name'] + "</td>").appendTo("#" + rowId);   
-                $("<td name='Job Desc'>" + value['Job Desc'] + "</td>").appendTo("#" + rowId);   
-                $("<td name='Number requested'>" + value['Number requested'] + "</td>").appendTo("#" + rowId);   
-                $("<td name='Job put on the machine at'> " + value['Job put on the machine at'] + "</td>").appendTo("#" + rowId);   
-                $("<td name='Job put off the machine at'>" + value['Job put off the machine at'] + "</td>").appendTo("#" + rowId);   
-                $("<td name='Number Achieved'>" + value['Number Achieved'] + "</td>").appendTo("#" + rowId);
-            
-                $('#datatable tr[name="' + machineType + '"]').on('click', function(event) {
-                    $(this).addClass('success').siblings().removeClass('success');
-                });
+                jQuery.each(currentHeaders, function(){
+		    var val = this;
+		    var bgcol = getBackgroundColor(val['id']);
+		    $("<td " + bgcol + " name='" + val['id'] + "'>" + value[val['id']] + "</td>").appendTo("#" + rowId);
+		});
+		
+                //$("<td name='jobName'>" + value['jobName'] + "</td>").appendTo("#" + rowId);   
+                //$("<td name='jobCode'>" + value['jobCode'] + "</td>").appendTo("#" + rowId);   
+                //$("<td name='numberRequested'>" + value['numberRequested'] + "</td>").appendTo("#" + rowId);   
+                //$("<td name='startTime'" + getBackgroundColor('startTime') + ">" + value['startTime'] + "</td>").appendTo("#" + rowId);   
+                //$("<td name='endTime'" + getBackgroundColor('startTime') + ">" + value['endTime'] + "</td>").appendTo("#" + rowId);   
+                //$("<td name='numberCompleted'" + getBackgroundColor('startTime') + ">" + value['numberCompleted'] + "</td>").appendTo("#" + rowId);
                 
+                //$("<td id=" + rowId + "_delete name='delete'><img src='http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/24/Actions-window-close-icon.png'></img></td>").on('click', function(e) { e.preventDefault(); deleteJob(rowId, machineType)}).appendTo("#" + rowId);
+                if(isAdmin()) {
+                    $("<td id=" + rowId + "_delete name='delete'><span class='glyphicon glyphicon-remove' data-toggle='tooltip' data-placement='right'  title='Delete this job'></span></td>").on('click', function(e) { e.preventDefault(); deleteJob(rowId, machineType)}).appendTo("#" + rowId);
+                }
+            	
+                 
             })
         })
     }); 
-    
+    $(function () { 
+        $("[data-toggle='tooltip']").tooltip(); 
+    });;
 }
 
-function deleteJob(machineType) {
-    var idd = $('#datatable tr[class="success"][name="' + machineType + '"]').attr('id');
+function deleteJob(idd, machineType) {
     $("#editdata").remove();
-    $("<div id='editdata' style='display:none'><p> Edit Job </p><table id='editdatatable' class='table table-bordered' style='width: 80%; height: 80%; margin: auto;'></table></div>").appendTo("body");
     var rows = new Array();
     rows = $("#" + idd + " td");
     if (rows.length <=0) {
@@ -245,7 +285,7 @@ function deleteJob(machineType) {
         return false;
     }
     if (confirm("Are you sure you want to delete this job")) {
-        var jobName = $("#" + idd + " td[name='Job Name']").text();
+        var jobName = $("#" + idd + " td[name='jobName']").text();
         submitDeleteJob(machineType, jobName);
     }
 }
@@ -255,22 +295,27 @@ function addJob(machineType) {
     var idd = $('#datatable tr[name="' + machineType + '"]').first().attr('id');
     $("#editdata").remove();
     $("<div id='editdata' style='display:none'><p> <b>Add new Job </b></p><table id='editdatatable' class='table table-bordered' style='width: 80%; height: 80%; margin: auto;'></table></div>").appendTo("body");
+    
     var rows = new Array();
+    
     $("#" + idd).find('td').each(function() {
         rows.push(this.getAttribute('name'));
     });
     if (rows === undefined || rows.length <= 0) {
-        rows = new Array("Job Name", "Job Desc", "Number requested", "Job put on the machine at", "Job put off the machine at", "Number Achieved");
+        rows = new Array("jobName", "jobCode", "numberRequested", "startTime", "endTime", "numberCompleted");
     }
     
     for(var i = 0; i < rows.length; i++) {
-        if (rows[i] == "Job put on the machine at" || rows[i] == "Job put off the machine at") {
-           $("<tr><td>" + rows[i] + "</td><td name=edit><input <input name='setTimeExample' type='text' class='time ui-timepicker-input' autocomplete='off' id='" + rows[i] + "'></input></td></tr>").appendTo("#editdatatable");
+        if(rows[i] == 'delete') { continue; }
+        var bgcol = getBackgroundColor(rows[i]);
+        if (rows[i] == "startTime" || rows[i] == "endTime") {
+           $("<tr><td " + bgcol + ">" + getDisplayName(rows[i]) + "</td><td name=edit  " + bgcol + "><input <input name='setTimeExample' type='text' class='time ui-timepicker-input' autocomplete='off' id='" + rows[i] + "'></input></td></tr>").appendTo("#editdatatable");
            $('input[name="setTimeExample"]').timepicker();
         } else {
-           $("<tr><td>" + rows[i] + "</td><td name=edit><input id='" + rows[i] + "' type=text></input></td></tr>").appendTo("#editdatatable");
+           $("<tr><td " + bgcol + ">" + getDisplayName(rows[i]) + "</td><td name=edit " + bgcol + "><input id='" + rows[i] + "' type=text></input></td></tr>").appendTo("#editdatatable");
         }
     }
+    
     $("<button class='btn btn-default align-left' type='submit'>Submit</button>").on('click', function(e) { e.preventDefault(); submitAddJob(machineType);}).appendTo("#editdata");
     $("<button class='btn btn-default align-left' type='cancel'>Cancel</button>").on('click', function(e) { e.preventDefault(); $.unblockUI();}).appendTo("#editdata");
     $.blockUI({
@@ -278,8 +323,71 @@ function addJob(machineType) {
     });
 }
 
-function editJob(machineType) {
-    var idd = $('#datatable tr[class="success"][name="' + machineType + '"]').attr('id');
+function getDisplayName (id) {
+    var display = id;
+    jQuery.each(currentHeaders, function(){
+        var val = this;
+        if(val['id'] == id) {
+            display = val['displayName'];
+            console.log(val['id'] + ':' + id + ':' + display); 
+            return false;
+        }
+    });
+    return display;
+}
+
+function getDisabledString (id) {
+    if(isAdmin()) {
+        return "";
+    }
+    
+    var str = "disabled";
+    jQuery.each(currentHeaders, function(){
+        var val = this;
+        if(val['id'] == id) {
+            var adminOnly = val['adminOnly'];
+            if(adminOnly == 0) {
+                str = "";
+            }
+            return false;
+        }
+    });
+    return str;
+}
+
+function getTypeOfColumn (id) {
+    var type;
+    jQuery.each(currentHeaders, function(){
+        var val = this;
+        if(val['id'] == id) {
+            type = val['type'];
+            console.log(val['id'] + ':' + id + ':' + type); 
+            return false;
+        }
+    });
+    return type;
+}
+
+function isAdmin () {
+    if(getCookie('isAdmin') == 0) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+function getBackgroundColor(id) {
+    if(isAdmin()) {
+        return "";
+    }
+    if(id == "endTime" || id == "startTime" || id == "numberCompleted") {
+        return "bgcolor=yellow";
+    } else {
+        return "";
+    }
+}
+
+function editJob(idd, machineType) {
     $("#editdata").remove();
     $("<div id='editdata' style='display:none'><p><b> Edit Job</b> </p><table id='editdatatable' class='table table-bordered' style='width: 80%; height: 80%; margin: auto;'></table></div>").appendTo("body");
     var rows = new Array();
@@ -295,11 +403,17 @@ function editJob(machineType) {
         var o = rows[i];
         var n = rows[i].getAttribute('name');
         var t = o.innerText || o.textContent || o.value || "";
-        if (n == "Job put on the machine at" || n == "Job put off the machine at") {
-           $("<tr><td>" + $(o).attr('name') + "</td><td name=edit><input id='" + $(o).attr('name') + "' name='setTimeExample' type='text' class='time ui-timepicker-input' autocomplete='off' id='" + $(o).attr('name') + "' value='" + t + "'></input></td></tr>").appendTo("#editdatatable");
+        var bgcol = getBackgroundColor(n);
+        
+        if(n == 'delete') { continue; }
+        
+        var type = getTypeOfColumn(n);
+        
+        if (type == "time") {
+           $("<tr><td " + bgcol + ">" + getDisplayName($(o).attr('name')) + "</td><td name=edit " + bgcol + "><input id='" + $(o).attr('name') + "' name='setTimeExample' type='text' class='time ui-timepicker-input' autocomplete='off' id='" + $(o).attr('name') + "' value='" + t + "'></input></td></tr>").appendTo("#editdatatable");
            $('input[name="setTimeExample"]').timepicker();
         } else {
-           $("<tr><td>" + n + "</td><td name=edit><input id='" + n + "' type=text value='" + t + "'></input></td></tr>").appendTo("#editdatatable");
+           $("<tr><td " + bgcol + ">" + getDisplayName(n) + "</td><td name=edit " + bgcol + "><input id='" + n + "' type=text value='" + t + "'" + getDisabledString(n) + "></input></td></tr>").appendTo("#editdatatable");
         }
     }
     $("<button class='btn btn-default align-left' type='submit'>Submit</button>").on('click', function(e) { e.preventDefault(); submitEditJob(machineType);}).appendTo("#editdata");
@@ -309,7 +423,26 @@ function editJob(machineType) {
     });
 }
 
+function displayYesterday () {
+    getDate(-1);
+    getHeaders($("#current_module").val());
+}
+
+
+function displayTomorrow () {
+    getDate(1);
+    getHeaders($("#current_module").val());
+}
+
+function displayToday () {
+    currentDisplayedDate = new Date();
+    getHeaders($("#current_module").val());
+}
 
 $(document).ready(function(e) {
+    currentDisplayedDate = new Date();
     displayModules();
+    $("#today").on('click', function(e) { e.preventDefault(); displayToday()});
+    $("#tomorrow").on('click', function(e) { e.preventDefault(); displayTomorrow()});
+    $("#yesterday").on('click', function(e) { e.preventDefault(); displayYesterday()});
 });

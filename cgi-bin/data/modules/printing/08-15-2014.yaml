@@ -1,0 +1,10 @@
+---
+- Komori Printing Machine:
+    - endTime: 3:00am
+      jobCode: desc
+      jobName: name
+      numberCompleted: 12
+      numberRequested: 100
+      startTime: 12:00am
+- Mitsubhishi Printing Machine: []
+- 2 Color Printing Machine: []

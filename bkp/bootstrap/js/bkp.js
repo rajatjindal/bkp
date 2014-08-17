@@ -52,7 +52,8 @@ $(document).ready(function(e) {
             success: function(data, textStatus, xhr) {
                 console.log(data);
                 setCookie("u", document.getElementById('email').value, 4);
-                setCookie("modules", data);
+                setCookie("modules", data['modules']);
+		setCookie("isAdmin", data['isAdmin']);
                 window.location = "/bkp/dashboard.html";
             }
         });    

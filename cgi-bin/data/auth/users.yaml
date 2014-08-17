@@ -1,4 +1,5 @@
 'sjindal':
+    isAdmin: 1
     modules: 
         printing:
             read: 1
@@ -25,6 +26,7 @@
         firstName: Sanjay
         lastName: Jindal
 'ssingla':
+    isAdmin: 1
     modules: 
         printing:
             read: 1
@@ -51,6 +53,7 @@
         firstName: Sandeep
         lastName: Singla
 'dsingla':
+    isAdmin: 1
     modules: 
         printing:
             read: 1
@@ -77,6 +80,7 @@
         firstName: Deepti
         lastName: Singla
 'die':
+    isAdmin: 0
     modules: 
         die:
             read: 1
@@ -88,6 +92,7 @@
         firstName: Die
         lastName: Team
 'printing':
+    isAdmin: 0
     modules: 
         printing:
             read: 1
@@ -99,6 +104,7 @@
         firstName: Printing
         lastName: Team
 'stitching':
+    isAdmin: 0
     modules:
         stiching:
             read: 1
@@ -110,6 +116,7 @@
         firstName: Stitching
         lastName: Team
 'corrogation':
+    isAdmin: 0
     modules: 
         corrogation:
             read: 1
@@ -121,6 +128,7 @@
         firstName: Corrogation
         lastName: Team
 'glue':
+    isAdmin: 0
     modules: 
         glue:
             read: 1
@@ -132,6 +140,7 @@
         firstName: Glue
         lastName: Team
 'dispatch':
+    isAdmin: 0
     modules: 
         dispatch:
             read: 1

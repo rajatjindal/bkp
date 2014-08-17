@@ -35,7 +35,7 @@ sub get_users {
     if($user->{'auth'}{'password'} ne $$args{'password'}) {
         return {code => 401, content => "Invalid username or password"}
     }
-    return { code => 200, content => [keys %{$user->{'modules'}}]};
+    return { code => 200, content => {modules => [keys %{$user->{'modules'}}], isAdmin => $user->{isAdmin}}};
 }
 
 1;

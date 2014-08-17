@@ -1,0 +1,9 @@
+---
+- Stitching Section:
+    - endTime: 2:00am
+      jobCode: job code
+      jobName: job name
+      numberCompleted: 20
+      numberRequested: 100
+      startTime: 1:00am
+- Manual Pasting: []
